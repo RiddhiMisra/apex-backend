@@ -12,10 +12,20 @@ import appointmentRouter from "./router/appointmentRouter.js";
 const app = express();
 config({ path: "./config/config.env" });
 
+const allowedOrigins = [process.env.FRONTEND_URL, process.env.DASHBOARD_URL,'https://apexmed-dashboard.netlify.app/'];
+
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL],
-    method: ["GET", "POST", "DELETE", "PUT"],
+    // origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
