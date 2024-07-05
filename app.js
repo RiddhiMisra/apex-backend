@@ -12,7 +12,7 @@ import appointmentRouter from "./router/appointmentRouter.js";
 const app = express();
 config({ path: "./config/config.env" });
 
-const allowedOrigins = [process.env.FRONTEND_URL, process.env.DASHBOARD_URL,'https://apexmed-dashboard.netlify.app/'];
+const allowedOrigins = [process.env.FRONTEND_URL, process.env.DASHBOARD_URL,'https://apexmed-dashboard.netlify.app'];
 
 
 app.use(
